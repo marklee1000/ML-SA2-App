@@ -28,12 +28,16 @@ class ClassifierNN(nn.Module):
 # Load model and scaler
 @st.cache_resource
 def load_model_and_scaler():
-    checkpoint = torch.load('uti_predictor/uti_mlp_model.pth', map_location=torch.device('cpu'))
+    base_path = os.path.dirname(__file__)
+    model_path = os.path.join(base_path, "uti_mlp_model.pth")
+    scaler_path = os.path.join(base_path, "scaler.pkl")
+
+    checkpoint = torch.load(model_path, map_location=torch.device('cpu'))
     model = ClassifierNN(activation_function=F.relu)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
     
-    with open('uti_predictor/scaler.pkl', 'rb') as f:
+    with open(scaler_path, 'rb') as f:
         scaler = pickle.load(f)
     
     return model, scaler
@@ -361,3 +365,4 @@ with tab2:
 st.write("---")
 
 st.caption("⚕️ This tool serves as an initial screening layer and should not be considered a substitute for confirmatory testing.")
+
