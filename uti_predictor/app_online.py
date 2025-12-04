@@ -200,7 +200,7 @@ with tab1:
         transparency = st.selectbox("Transparency", options=[
             "CLEAR", "SLIGHTLY HAZY", "HAZY", "CLOUDY", "TURBID"
         ])
-        ph = st.number_input("pH", min_value=4.0, max_value=9.0, value=6.0, step=0.1)
+        ph = st.number_input("pH", min_value=4.0, max_value=11.0, value=6.0, step=0.1)
         glucose = st.selectbox("Glucose", options=[
             "NEGATIVE", "TRACE", "1+", "2+", "3+", "4+"
         ])
@@ -365,4 +365,5 @@ with tab2:
 st.write("---")
 
 st.caption("⚕️ This tool serves as an initial screening layer and should not be considered a substitute for confirmatory testing.")
+
 
