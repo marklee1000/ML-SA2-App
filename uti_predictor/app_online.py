@@ -28,12 +28,12 @@ class ClassifierNN(nn.Module):
 # Load model and scaler
 @st.cache_resource
 def load_model_and_scaler():
-    checkpoint = torch.load('uti_mlp_model.pth', map_location=torch.device('cpu'))
+    checkpoint = torch.load('uti_predictor/uti_mlp_model.pth', map_location=torch.device('cpu'))
     model = ClassifierNN(activation_function=F.relu)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()
     
-    with open('scaler.pkl', 'rb') as f:
+    with open('uti_predictor/scaler.pkl', 'rb') as f:
         scaler = pickle.load(f)
     
     return model, scaler
@@ -359,4 +359,5 @@ with tab2:
             st.write("Please make sure your CSV has all required columns with correct values.")
 
 st.write("---")
+
 st.caption("⚕️ This tool serves as an initial screening layer and should not be considered a substitute for confirmatory testing.")
